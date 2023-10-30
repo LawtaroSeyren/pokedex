@@ -11,6 +11,9 @@ export const usePokemonCard = (selectedType) => {
         try {
           const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3000&offset=0');
           const { results } = await response.json();
+          if (!response.ok) {
+            throw new Error('Error al obtener lista de Pokémon');
+          }
           const urls = results.map(result => result.url);
           const pokemonInfo = await Promise.all(urls.map(url => fetch(url).then(response => response.json())));
           const basicPokemonInfo = pokemonInfo.map(pokemon => ({
