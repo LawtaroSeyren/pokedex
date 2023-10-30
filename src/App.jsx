@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const usePokemonCard = () => {
+  const [pokemonList, setPokemonList] = useState([]);
+  
+
+  useEffect(() => {
+    const fetchPokemonData = async () => {
+      try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3000&offset=0');
+        const data = await response.json();
+        const urls = data.results.map(result => result.url);
+        const pokemonInfo = await Promise.all(urls.map(url => fetch(url).then(response => response.json())));
+        const basicPokemonInfo = pokemonInfo.map(pokemon => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          sprite: pokemon.sprites.front_default,
+          types: pokemon.types.map(type => type.type.name),
+        }));
+
+        setPokemonList(basicPokemonInfo);
+      } catch (error) {
+        console.error('Error al obtener información de los Pokémon', error);
+      }
+    };
+
+    fetchPokemonData();
+  }, []);
+
+  return pokemonList;
+};
+
+const App = () => {
+  const pokemonList = usePokemonCard();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      {pokemonList.map(pokemon => (
+        <div key={pokemon.id}>
+          <h2>{pokemon.name}</h2>
+          <p>ID: {pokemon.id}</p>
+          <img src={pokemon.sprite} alt={pokemon.name} />
+          {pokemon.types.map((type) => <p key={type}>{type}</p> )}
+        </div>
+      ))}
+    </div>
+  );
+};
 
-export default App
+export default App;
