@@ -1,8 +1,8 @@
 import React from 'react';
 import { usePokemonCard } from '../../../hooks/usePokemonCard';
 
-const PokeGrid = () => {
-  const [ pokemonList, isLoading ] = usePokemonCard();
+const PokeGrid = ({selectedType}) => {
+  const [ pokemonList, isLoading ] = usePokemonCard(selectedType);
 
   return (
 <div>

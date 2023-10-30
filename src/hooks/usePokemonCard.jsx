@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePokemonCard = () => {
+export const usePokemonCard = (selectedType) => {
     const [ pokemonList, setPokemonList ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
     
@@ -30,7 +30,7 @@ export const usePokemonCard = () => {
       };
   
       fetchPokemonData();
-    }, []);
+    }, [selectedType]);
   
     return [ pokemonList, isLoading ];
   };
