@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePokemonCard } from '../../../hooks/usePokemonCard';
+import PokeCard from './PokeCard';
 
 const PokeGrid = ({selectedType}) => {
   const [ pokemonList, isLoading ] = usePokemonCard(selectedType);
@@ -9,14 +10,12 @@ const PokeGrid = ({selectedType}) => {
       {isLoading ? (
         <h2>Cargando...</h2>
       ) : (
-        pokemonList.map(pokemon => (
-          <div key={pokemon.id}>
-            <h2>{pokemon.name}</h2>
-            <p>ID: {pokemon.id}</p>
-            <img src={pokemon.sprite} alt={pokemon.name} />
-            {pokemon.types.map((type) => <p key={type}>{type}</p>)}
-          </div>
+        
+        pokemonList.map((pokemon) => (
+         <PokeCard key={ pokemon.id } { ...pokemon }/>
         ))
+
+
       )}
     </div>
   );
