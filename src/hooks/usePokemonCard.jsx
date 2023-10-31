@@ -1,46 +1,51 @@
 import { useState, useEffect } from 'react';
 
 export const usePokemonCard = (selectedType) => {
-    const [ pokemonList, setPokemonList ] = useState([]);
-    const [ isLoading, setIsLoading ] = useState(false);
-    
-  
-    useEffect(() => {
-        setIsLoading(true);
+  const [pokemonList, setPokemonList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-      const fetchPokemonData = async () => {
-        try {
-          const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3000&offset=0');
+  useEffect(() => {
+    setIsLoading(true);
 
-          const { results } = await response.json();
-          if (!response.ok) {
-            throw new Error('Error al obtener lista de Pokémon');
-          }
-
-          const urls = results.map(result => result.url);
-          const pokemonInfo = await Promise.all(urls.map(url => fetch(url).then(response => response.json())));
-
-          const basicPokemonInfo = pokemonInfo.map(pokemon => ({
-            id: pokemon.id,
-            name: pokemon.name,
-            sprite: pokemon.sprites.front_default,
-            default: pokemon.is_default,
-            types: pokemon.types.map(type => type.type.name),
-          }));
-
-          const defaultPokemon = basicPokemonInfo.filter( ( pokemon ) => pokemon.default);
-
-          setPokemonList(defaultPokemon);
-
-        } catch (error) {
-          console.error('Error al obtener información de los Pokémon', error);
-        } finally {
-        setIsLoading(false);
+    const fetchPokemonData = async () => {
+      try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3000&offset=0');
+        const { results } = await response.json();
+        if (!response.ok) {
+          throw new Error('Error al obtener lista de Pokémon');
         }
-      };
-  
-      fetchPokemonData();
-    }, [selectedType]);
-  
-    return [ pokemonList, isLoading ];
-  };
+
+        const urls = results.map(result => result.url);
+        const pokemonInfo = await Promise.all(urls.map(url => fetch(url).then(response => response.json())));
+
+        const basicPokemonInfo = pokemonInfo.map(pokemon => ({
+          id: pokemon.id,
+          name: pokemon.name,
+          sprite: pokemon.sprites.front_default,
+          default: pokemon.is_default,
+          types: pokemon.types.map(type => type.type.name),
+        }));
+
+        let filteredPokemon;
+
+        if (selectedType === 'todos') {
+          filteredPokemon = basicPokemonInfo.filter(pokemon => pokemon.default);
+        } else {
+          filteredPokemon = basicPokemonInfo.filter(pokemon =>
+            pokemon.types.includes(selectedType) && pokemon.default
+          );
+        }
+
+        setPokemonList(filteredPokemon);
+      } catch (error) {
+        console.error('Error al obtener información de los Pokémon', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPokemonData();
+  }, [selectedType]);
+
+  return [pokemonList, isLoading];
+};
