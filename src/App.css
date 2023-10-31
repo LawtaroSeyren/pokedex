@@ -1,14 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
-  }
-  
-  #root {
+    font-family: 'Poppins', sans-serif;
+}
+
+#root {
     text-align: center;
-  }
+}
+
+/* Estilos PokeGrid */
 
 .pokemon-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
+    gap: 2rem;
+}
+
+.pokecard {
+    text-decoration: none;
+}
+
+.typeBtn {
+    padding: 4px;
+    margin: 2px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 2px 5px #c0c7db;
+    text-shadow:
+        -1px -1px 1px rgba(0, 0, 0, 0.7),
+        1px -1px 1px rgba(0, 0, 0, 0.7),
+        -1px 1px 1px rgba(0, 0, 0, 0.7),
+        1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.bug {
+    background-color: #a8b820;
+    ;
+}
+
+.dark {
+    background-color: #705848;
+}
+
+.dragon {
+    background-color: #7038f8;
+}
+
+.electric {
+    background-color: #f8d030;
+}
+
+.fairy {
+    background-color: #f0b6bc;
+}
+
+.fighting {
+    background-color: #c03028;
+}
+
+.fire {
+    background-color: #f08030;
+}
+
+.flying {
+    background-color: #a890f0;
+}
+
+.grass {
+    background-color: #78c850;
+}
+
+.ground {
+    background-color: #e0c068;
+}
+
+.ghost {
+    background-color: #705898;
+}
+
+.ice {
+    background-color: #98d8d8;
+}
+
+.normal {
+    background-color: #a8a878;
+}
+
+.poison {
+    background-color: #a040a0;
+}
+
+.psychic {
+    background-color: #f55988;
+}
+
+.rock {
+    background-color: #b79f39;
+}
+
+.water {
+    background-color: #6890f0;
+}
+
+.steel {
+    background-color: #b8b8d0;
+}
+
+.unknown {
+    background-color: #191919;
+}
