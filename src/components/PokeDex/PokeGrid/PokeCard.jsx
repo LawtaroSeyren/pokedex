@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const PokeCard = ({ name, id, sprite, types }) => {
   return (
-    <NavLink NavLink to={`/pokemon/${ id }`} >
+    <NavLink to={`/pokemon/${ id }`} >
     <div key={id}>
     <h2>{name}</h2>
     <p>ID: {id}</p>

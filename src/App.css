@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #root {
+    text-align: center;
+  }
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }

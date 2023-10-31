@@ -6,7 +6,7 @@ const PokeGrid = ({selectedType}) => {
   const [ pokemonList, isLoading ] = usePokemonCard(selectedType);
 
   return (
-<div>
+<div className="pokemon-list">
       {isLoading ? (
         <h2>Cargando...</h2>
       ) : (

@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css'
 import PokeDex from './components/PokeDex/PokeDex'
 import Header from './components/Header/Header'
 
