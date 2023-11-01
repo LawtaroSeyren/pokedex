@@ -27,18 +27,7 @@ body {
     }
   }
 
-/* Estilos PokeGrid */
-
-.pokemon-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.pokecard {
-    text-decoration: none;
-}
+/* Estilo botón de Types */
 
 .typeBtn {
     padding: 4px;
@@ -129,3 +118,38 @@ body {
 .unknown {
     background-color: #191919;
 }
+
+/* Estilos PokeGrid */
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.pokecard {
+    text-decoration: none;
+}
+
+/* Estilos PokeDetail */
+
+.moves-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .rojo {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+  }
+  
+  .azul {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    margin: 5px;
+  }

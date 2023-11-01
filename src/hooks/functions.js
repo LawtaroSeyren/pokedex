@@ -88,16 +88,30 @@ export const fetchBasicData = async (url) => {
     } = basicData;
 
     const name = cleanName(pokeName)
-    const moves = ( moveNames.map((move) => move.move.name) || [] );
+    const moves = ( moveNames.map((move) => cleanName(move.move.name)) || [] );
     const weight = defaultWeight ?? "??";
     const height = defaultHeight ?? "??";
     const enTypes = types?.map(({ type }) => type.name) || ["unknown"];
     const spTypes = translateTypes(enTypes) ?? [{ type: "unknown", spType: "DESCONOCIDO" }];
     const sprite = defaultSprite;
     const image = defaultImage;
-    const abilities = (abis?.map((ability) => ability?.ability?.name) || []);
+    const abilities = (abis?.map((ability) => cleanName(ability?.ability?.name)) || []);
 
     return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves }
 
 }
 
+//* Función para obtener información complementaria a partir de ID (descripción, genera, nombre en japonés, url de cadena evolutiva) *//
+
+export const fetchSpeciesData = async ( id ) => {
+
+    const response = await fetch( `${urlBase}/pokemon-species/${id}` );
+    const speciesData = await response.json();
+
+    const desc = speciesData.flavor_text_entries.find( entry => entry.language.name === "en" );
+    const { genus: genera = "???" } = speciesData.genera.find(item => item.language.name === "en") || {};
+    const japaneseName = speciesData.names[0].name 
+    const { evolution_chain: { url: evoUrl } } = speciesData;
+
+    return { evoUrl, desc, genera, japaneseName };
+}

@@ -20,11 +20,13 @@ export const PokeDetail = () => {
         <comp.Loader />
       ) :
         <div>
-          <h3>{pokemonData.name}</h3>
+          <h2>{pokemonData.name}</h2>
+          <h3>{pokemonData.japaneseName}</h3>
           <p>ID: {pokemonData.id}</p>
           <img src={pokemonData.image} alt={pokemonData.name} />
+          <p>{pokemonData.genera}</p>
           <p>
-            {pokemonData.spTypes.map(({ type, spType }) => (< comp.TypeBadge key={ type } type={ type } spType={ spType } />))}
+            {pokemonData.spTypes.map(({ type, spType }) => (< comp.TypeBadge key={type} type={type} spType={spType} />))}
           </p>
           <p>PESO:</p> <p>{pokemonData.weight / 10} KG</p> <p> ALTURA: </p> <p>{pokemonData.height / 10} M.</p>
           <p> HABILIDADES: </p>
@@ -34,19 +36,14 @@ export const PokeDetail = () => {
         </div>
       }
 
-      { pokemonData.stats.map( ( stat ) => {(
-          <div key={ stat.stat.name }>
-            <p>{ stat.stat.name }: { stat.base_stat }</p>
-          </div>
-        );
+      {pokemonData.stats.map((stat) => {
+        (<div key={stat.stat.name}>
+          <p>{stat.stat.name}: {stat.base_stat}</p>
+        </div>);
       })}
-<p>MOVIMIENTOS:</p>
-{pokemonData.moves.map((move, index) => (
-  <div key={index}>
-    <p>{move}</p>
-  </div>
-))}
 
+      <p>MOVIMIENTOS:</p>
+    <comp.MoveBadge moves={pokemonData.moves}/>
     </>
   )
 }
