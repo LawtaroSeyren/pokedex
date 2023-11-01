@@ -11,7 +11,8 @@ export const PokeDetail = () => {
     setCurrentId(Number(initialId));
   }, [initialId]);
 
-  const { pokemonData, isLoading, evolutionChain } = usePokemonDetail(currentId);
+  const { pokemonData, isLoading, evolutionChain, nextPokemon, prevPokemon } = usePokemonDetail(currentId);
+  console.log(nextPokemon, prevPokemon)
 
   return (
     <>
