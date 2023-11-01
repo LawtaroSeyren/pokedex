@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { translateTypes, urlBase, fetchBasicData } from "./functions";
+import { urlBase, fetchBasicData } from "./functions";
 
 export const usePokemonCard = (selectedType) => {
   const [pokemonList, setPokemonList] = useState([]);

@@ -1,4 +1,5 @@
 import React from 'react'
+import * as comp from '../../'
 import { NavLink } from 'react-router-dom';
 
 export const PokeCard = ( pokemon ) => {
@@ -9,9 +10,9 @@ export const PokeCard = ( pokemon ) => {
     <p>ID: {pokemon.id}</p>
     <img src={pokemon.sprite} alt={pokemon.name} />
     <p>
-    {pokemon.spTypes.map(( {type, spType }) => <span key={type} className = { `typeBtn ${ type }` } >
-            { spType }
-        </span>)}
+    {pokemon.spTypes.map(( {type, spType }) => (
+      < comp.TypeBadge key={ type } type={ type } spType={ spType } />
+    ) )}
         </p>
   </NavLink>
   )

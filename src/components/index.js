@@ -9,3 +9,4 @@ export { PokeDetail } from './PokeDex/PokeDetail/PokeDetail';
 export { PokeDex } from './PokeDex/PokeDex';
 export { PokeCard } from './PokeDex/PokeGrid/PokeCard';
 export { PokeGrid } from './PokeDex/PokeGrid/PokeGrid';
+export { TypeBadge } from './PokeDex/TypeBadge/TypeBadge';
