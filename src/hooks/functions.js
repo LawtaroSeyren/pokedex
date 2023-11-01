@@ -4,6 +4,8 @@ export { useTypes } from './useTypes'
 export { usePokemonCard } from './usePokemonCard'
 export { usePokemonDetail } from './usePokemonDetail'
 
+// Traducción de los types
+
 export const typeNames = {
     bug: 'BICHO',
     dark: 'SINIESTRO',
@@ -24,6 +26,12 @@ export const typeNames = {
     water: 'AGUA',
     steel: 'ACERO',
 };
+
+// Corección en los nombres de los Pokémon
+
+const cleanName = ( name ) => {
+ return name.charAt(0).toUpperCase() + name.slice(1)
+}
 
 //* Función para traducir los nombres de los types *//
 // La función siempre va a devolver un objeto con las propiedades type (nombre en inglés) y spType (su traducción)
@@ -53,7 +61,7 @@ export const fetchBasicData = async (url) => {
     const basicData = await response.json();
 
     const {
-        name,
+        name: pokeName,
         stats = [
             { base_stat: 1, stat: { name: "hp" } },
             { base_stat: 1, stat: { name: "attack" } },
@@ -63,8 +71,8 @@ export const fetchBasicData = async (url) => {
             { base_stat: 1, stat: { name: "speed" } }
         ],
         id,
-        weight,
-        height,
+        weight: defaultWeight,
+        height: defaultHeight,
         types,
         is_default = false,
         abilities: abis,
@@ -78,6 +86,9 @@ export const fetchBasicData = async (url) => {
         }
     } = basicData;
 
+    const name = cleanName(pokeName)
+    const weight = defaultWeight ?? "??";
+    const height = defaultHeight ?? "??";
     const enTypes = types?.map(({ type }) => type.name) || ["unknown"];
     const spTypes = translateTypes(enTypes) ?? [{ type: "unknown", spType: "DESCONOCIDO" }];
     const sprite = defaultSprite;
@@ -87,3 +98,4 @@ export const fetchBasicData = async (url) => {
     return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image }
 
 }
+
