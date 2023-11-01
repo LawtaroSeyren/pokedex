@@ -19,8 +19,6 @@ export const usePokemonCard = (selectedType) => {
         const urls = results.map(result => result.url);
         const pokemonInfo = await Promise.all(urls.map(fetchBasicData));
 
-        console.log(pokemonInfo)
-
         let filteredPokemon;
 
         if (selectedType === 'todos') {
@@ -30,8 +28,6 @@ export const usePokemonCard = (selectedType) => {
             pokemon.enTypes.includes(selectedType) && pokemon.is_default
           );
         }
-
-        console.log(filteredPokemon)
 
         setPokemonList(filteredPokemon);
       } catch (error) {

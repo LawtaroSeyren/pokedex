@@ -1,7 +1,11 @@
 import React from 'react'
+import * as comp from '../../'
 
 export const PokeDetail = () => {
   return (
-    <div>Pokémon</div>
+    <div>
+      <comp.Header/>
+      <h1>Pokemon</h1>
+    </div>
   )
 }
