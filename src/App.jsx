@@ -1,16 +1,13 @@
 import React from 'react'
 import './App.css'
-import PokeDex from './components/PokeDex/PokeDex'
-import Header from './components/Header/Header'
+import * as comp from './components'
 
 
-const App = () => {
+export const App = () => {
   return (
     <div>
-      <Header/>
-      <PokeDex/>
+      <comp.Header/>
+      <comp.PokeDex/>
     </div>
   )
 }
-
-export default App

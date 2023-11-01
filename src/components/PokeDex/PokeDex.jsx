@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import PokeGrid from './PokeGrid/PokeGrid'
-import DropdownMenu from './DropdownMenu/DropdownMenu'
+import * as comp from '../'
 import { useTypes } from '../../hooks/useTypes';
 
-const PokeDex = () => {
+export const PokeDex = () => {
 
   const [selectedType, setSelectedType] = useState('todos');
 
@@ -16,10 +15,8 @@ const PokeDex = () => {
 
   return (
     <>
-      <DropdownMenu onTypeChange={handleTypeChange} selectedType={selectedType} types={types} />
-      <PokeGrid selectedType={selectedType} />
+      <comp.DropdownMenu onTypeChange={handleTypeChange} selectedType={selectedType} types={types} />
+      <comp.PokeGrid selectedType={selectedType} />
     </>
   )
 }
-
-export default PokeDex

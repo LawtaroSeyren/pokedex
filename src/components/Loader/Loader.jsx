@@ -1,12 +1,10 @@
-import pokeball from '../../assets/pokeball.png'
+import { loader } from '../'
 
-const Loader = () => {
+export const Loader = () => {
   return (
     <>
-      <img src={ pokeball } className="rotating-image" />
+      <img src={ loader } className="rotating-image" />
       <h2>Cargando...</h2>
       </>
   )
 }
-
-export default Loader;

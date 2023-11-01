@@ -1,19 +1,18 @@
 import React from 'react';
 import { usePokemonCard } from '../../../hooks/usePokemonCard';
-import PokeCard from './PokeCard';
-import Loader from '../../Loader/Loader';
+import * as comp from '../../'
 
-const PokeGrid = ({selectedType}) => {
+export const PokeGrid = ({selectedType}) => {
   const [ pokemonList, isLoading ] = usePokemonCard(selectedType);
 
   return (
 <div className="pokemon-list">
       {isLoading ? (
-        <Loader/>
+        <comp.Loader/>
       ) : (
         
         pokemonList.map((pokemon) => (
-         <PokeCard key={ pokemon.id } { ...pokemon }/>
+         <comp.PokeCard key={ pokemon.id } { ...pokemon }/>
         ))
 
 
@@ -21,5 +20,3 @@ const PokeGrid = ({selectedType}) => {
     </div>
   );
 };
-
-export default PokeGrid;

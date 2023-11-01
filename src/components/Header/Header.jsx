@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Header = () => {
+export const Header = () => {
   return (
     <h1>PokéDex</h1>
   )
 }
-
-export default Header

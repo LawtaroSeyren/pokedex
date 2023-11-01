@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-const PokeCard = ({ name, id, sprite, types }) => {
+export const PokeCard = ({ name, id, sprite, types }) => {
   return (
     <NavLink className="pokecard" to={`/pokemon/${ id }`} >
     <h2>{name}</h2>
@@ -15,5 +15,3 @@ const PokeCard = ({ name, id, sprite, types }) => {
   </NavLink>
   )
 }
-
-export default PokeCard

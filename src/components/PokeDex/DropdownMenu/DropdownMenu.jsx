@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DropdownMenu = ({ selectedType, onTypeChange, types }) => {
+export const DropdownMenu = ({ selectedType, onTypeChange, types }) => {
 
     console.log(types)
 
@@ -18,5 +18,3 @@ const DropdownMenu = ({ selectedType, onTypeChange, types }) => {
         </div>
     )
 }
-
-export default DropdownMenu
