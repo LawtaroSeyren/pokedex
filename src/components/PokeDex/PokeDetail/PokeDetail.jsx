@@ -1,19 +1,27 @@
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import * as comp from '../../';
 import { usePokemonDetail } from '../../../hooks/functions'
 import { useEffect, useState } from 'react';
 
 export const PokeDetail = () => {
+
   const { id: initialId } = useParams();
-  const [currentId, setCurrentId] = useState(Number(initialId));
+
+  const navigate = useNavigate();
+  const [ currentId, setCurrentId ] = useState( Number( initialId ) );
 
   useEffect(() => {
-    setCurrentId(Number(initialId));
-  }, [initialId]);
+    navigate( `/pokemon/${ currentId }` );
+  }, [ currentId ] );
 
-  const { pokemonData, isLoading, evolutionChain, nextPokemon, prevPokemon } = usePokemonDetail(currentId);
-  console.log(nextPokemon, prevPokemon)
+  useEffect(() => {
+    setCurrentId( Number( initialId ) );
+  }, [ initialId ] );
 
+
+  const { pokemonData, isLoading, evolutionChain, prevPokemon, nextPokemon } = usePokemonDetail( currentId );
+
+  
   return (
     <>
       <comp.Header />
@@ -21,9 +29,7 @@ export const PokeDetail = () => {
         <comp.Loader />
       ) :
         <div>
-          <h2>{pokemonData.name}</h2>
-          <h3>{pokemonData.japaneseName}</h3>
-          <p>ID: {pokemonData.id}</p>
+          <comp.NameDetail { ...pokemonData } setCurrentId={ setCurrentId }  prevPokemon={ prevPokemon } nextPokemon={ nextPokemon } />
           <img src={pokemonData.image} alt={pokemonData.name} />
           <p>{pokemonData.genera}</p>
           <p>

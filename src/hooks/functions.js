@@ -109,7 +109,7 @@ export const fetchSpeciesData = async (id) => {
 
     if (!response.ok) {
         // Si la respuesta no es exitosa, se redirige al path '/'
-        // Esto es útil ya que el ID se obtiene por useParams, y si se ingresa cualquier id aleatorio se regresará al inicio
+        // Esto es útil ya que el ID se obtiene por useParams, y si se ingresa cualquier id aleatorio regresará al inicio
         window.location.href = '/';
         return;
     }
@@ -130,61 +130,61 @@ export const fetchSpeciesData = async (id) => {
 
 //*  *//
 
-export const fetchEvolutionChain = async ( evourl, name, image, id  ) => {
+export const fetchEvolutionChain = async (evourl, name, image, id) => {
     if (!evourl) {
-      // Si evoUrl es null o undefined, crea un evolutionChain por defecto
-      const defaultEvolutionChain = [{ name, image, id }];
-      return defaultEvolutionChain;
+        // Si evoUrl es null o undefined, crea un evolutionChain por defecto
+        const defaultEvolutionChain = [{ name, image, id }];
+        return defaultEvolutionChain;
     }
-  
-    const evolutionResponse = await fetch( evourl );
-    const evolutionData = await evolutionResponse.json();
-    const evolutionChain = await processEvolutionChain( evolutionData );
-    return evolutionChain;
-  };
 
-  const processEvolutionChain = async ( evolutionData ) => {
+    const evolutionResponse = await fetch(evourl);
+    const evolutionData = await evolutionResponse.json();
+    const evolutionChain = await processEvolutionChain(evolutionData);
+    return evolutionChain;
+};
+
+const processEvolutionChain = async (evolutionData) => {
     // La función me va a devolver un array
     const evolutionChain = [];
-  
+
     // Esta función me permite obtener el ID de un Pokémon que forma parte de la cadena evolutiva a partir de la URL
-    const getIdFromUrl = ( url ) => {
-      const idFromUrl = url.split( '/' );
-      return idFromUrl[ idFromUrl.length - 2 ];
+    const getIdFromUrl = (url) => {
+        const idFromUrl = url.split('/');
+        return idFromUrl[idFromUrl.length - 2];
     };
-  
-    const getStage = async ( stageData ) => {
-      const speciesId = getIdFromUrl( stageData.species.url );
-      // Fetch para obtener imagen
-      const response = await fetch(`${urlBase}/pokemon/${speciesId}`)
-      const data = await response.json();
-      const imageUrl = data.sprites.front_default;
-      const stage = {
-        name: cleanName( stageData.species.name ),
-        url: stageData.species.url,
-        image: imageUrl ?? missingno,
-        id: speciesId,
-      };
-  
-      if ( stageData.evolves_to && stageData.evolves_to.length > 0 ) {
-        // Si hay evoluciones, se procesan como un subarray de "evolution"
-        stage.evolution = [];
-        for ( const evolution of stageData.evolves_to ) {
-          stage.evolution.push( await getStage( evolution ) );
+
+    const getStage = async (stageData) => {
+        const speciesId = getIdFromUrl(stageData.species.url);
+        // Fetch para obtener imagen
+        const response = await fetch(`${urlBase}/pokemon/${speciesId}`)
+        const data = await response.json();
+        const imageUrl = data.sprites.front_default;
+        const stage = {
+            name: cleanName(stageData.species.name),
+            url: stageData.species.url,
+            image: imageUrl ?? missingno,
+            id: speciesId,
+        };
+
+        if (stageData.evolves_to && stageData.evolves_to.length > 0) {
+            // Si hay evoluciones, se procesan como un subarray de "evolution"
+            stage.evolution = [];
+            for (const evolution of stageData.evolves_to) {
+                stage.evolution.push(await getStage(evolution));
+            }
         }
-      }
 
-      return stage;
+        return stage;
     };
-  
-    evolutionChain.push( await getStage( evolutionData.chain ) );
-  
-    return evolutionChain;
-  };
 
-  export const getMiniData = async( id ) => {
-    const response = await fetch( `${urlBase}/pokemon/${id}` );
+    evolutionChain.push(await getStage(evolutionData.chain));
+
+    return evolutionChain;
+};
+
+export const getMiniData = async (id) => {
+    const response = await fetch(`${urlBase}/pokemon/${id}`);
     const miniData = await response.json();
-    const name = cleanName( miniData.name );
+    const name = cleanName(miniData.name);
     return { name, id }
-  }
+}

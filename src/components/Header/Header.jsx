@@ -1,7 +1,10 @@
-import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { logo }  from '../'
 
 export const Header = () => {
   return (
-    <h1>PokéDex</h1>
+    <div className="header">
+        <NavLink to={ "/" }><img src={ logo } alt="Logo de PokeApp" className="logo-app" /></NavLink>
+    </div>
   )
 }
