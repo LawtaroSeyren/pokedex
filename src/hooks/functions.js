@@ -76,6 +76,7 @@ export const fetchBasicData = async (url) => {
         types,
         is_default = false,
         abilities: abis,
+        moves: moveNames,
         sprites: {
             other: {
                 "official-artwork": {
@@ -87,6 +88,7 @@ export const fetchBasicData = async (url) => {
     } = basicData;
 
     const name = cleanName(pokeName)
+    const moves = ( moveNames.map((move) => move.move.name) || [] );
     const weight = defaultWeight ?? "??";
     const height = defaultHeight ?? "??";
     const enTypes = types?.map(({ type }) => type.name) || ["unknown"];
@@ -95,7 +97,7 @@ export const fetchBasicData = async (url) => {
     const image = defaultImage;
     const abilities = (abis?.map((ability) => ability?.ability?.name) || []);
 
-    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image }
+    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves }
 
 }
 

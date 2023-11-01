@@ -34,6 +34,19 @@ export const PokeDetail = () => {
         </div>
       }
 
+      { pokemonData.stats.map( ( stat ) => {(
+          <div key={ stat.stat.name }>
+            <p>{ stat.stat.name }: { stat.base_stat }</p>
+          </div>
+        );
+      })}
+<p>MOVIMIENTOS:</p>
+{pokemonData.moves.map((move, index) => (
+  <div key={index}>
+    <p>{move}</p>
+  </div>
+))}
+
     </>
   )
 }
