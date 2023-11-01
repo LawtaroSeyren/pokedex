@@ -47,6 +47,9 @@ export const translateTypes = (input) => {
 
 export const fetchBasicData = async (url) => {
     const response = await fetch(url);
+    if(!response.ok){
+        console.warn("Error al obtener información")
+    }
     const basicData = await response.json();
 
     const {
