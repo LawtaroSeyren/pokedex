@@ -2,6 +2,7 @@ export const urlBase = "https://pokeapi.co/api/v2"
 
 export { useTypes } from './useTypes'
 export { usePokemonCard } from './usePokemonCard'
+export { usePokemonDetail } from './usePokemonDetail'
 
 export const typeNames = {
     bug: 'BICHO',
