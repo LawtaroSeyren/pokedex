@@ -11,7 +11,7 @@ export const PokeDetail = () => {
     setCurrentId(Number(initialId));
   }, [initialId]);
 
-  const { pokemonData, isLoading } = usePokemonDetail(currentId);
+  const { pokemonData, isLoading, evolutionChain } = usePokemonDetail(currentId);
 
   return (
     <>
@@ -44,6 +44,8 @@ export const PokeDetail = () => {
 
       <p>MOVIMIENTOS:</p>
     <comp.MoveBadge moves={pokemonData.moves}/>
+    <hr/>
+    <comp.Evolution evolutionChain={evolutionChain} />
     </>
   )
 }

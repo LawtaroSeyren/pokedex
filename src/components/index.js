@@ -1,7 +1,7 @@
 import loader from '../assets/pokeball.png'
 
-
 export { App } from "../App";
+export { Evolution } from './PokeDex/PokeDetail/Evolution/Evolution';
 export { Header } from './Header/Header';
 export { Loader } from './Loader/Loader';
 export { loader };
