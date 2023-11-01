@@ -10,6 +10,23 @@ body {
     text-align: center;
 }
 
+/* Estilos Loader */
+
+.rotating-image {
+    width: 200px;
+    height: 200px;
+    animation: rotate 3s linear infinite;
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(720deg);
+    }
+  }
+
 /* Estilos PokeGrid */
 
 .pokemon-list {

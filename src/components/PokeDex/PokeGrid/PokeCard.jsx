@@ -8,7 +8,7 @@ const PokeCard = ({ name, id, sprite, types }) => {
     <p>ID: {id}</p>
     <img src={sprite} alt={name} />
     <p>
-    {types.map((type) => <span className = { `typeBtn ${ type }` } >
+    {types.map((type) => <span key={type} className = { `typeBtn ${ type }` } >
             { type }
         </span>)}
         </p>
