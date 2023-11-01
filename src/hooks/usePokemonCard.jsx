@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { translateTypes, urlBase, fetchBasicData } from "./functions";
 
 export const usePokemonCard = (selectedType) => {
   const [pokemonList, setPokemonList] = useState([]);
@@ -9,32 +10,28 @@ export const usePokemonCard = (selectedType) => {
 
     const fetchPokemonData = async () => {
       try {
-        const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=3000&offset=0');
+        const response = await fetch(`${urlBase}/pokemon?limit=3000&offset=0`);
         const { results } = await response.json();
         if (!response.ok) {
           throw new Error('Error al obtener lista de Pokémon');
         }
 
         const urls = results.map(result => result.url);
-        const pokemonInfo = await Promise.all(urls.map(url => fetch(url).then(response => response.json())));
+        const pokemonInfo = await Promise.all(urls.map(fetchBasicData));
 
-        const basicPokemonInfo = pokemonInfo.map(pokemon => ({
-          id: pokemon.id,
-          name: pokemon.name,
-          sprite: pokemon.sprites.front_default,
-          default: pokemon.is_default,
-          types: pokemon.types.map(type => type.type.name),
-        }));
+        console.log(pokemonInfo)
 
         let filteredPokemon;
 
         if (selectedType === 'todos') {
-          filteredPokemon = basicPokemonInfo.filter(pokemon => pokemon.default);
+          filteredPokemon = pokemonInfo.filter(pokemon => pokemon.is_default);
         } else {
-          filteredPokemon = basicPokemonInfo.filter(pokemon =>
-            pokemon.types.includes(selectedType) && pokemon.default
+          filteredPokemon = pokemonInfo.filter(pokemon =>
+            pokemon.enTypes.includes(selectedType) && pokemon.is_default
           );
         }
+
+        console.log(filteredPokemon)
 
         setPokemonList(filteredPokemon);
       } catch (error) {
