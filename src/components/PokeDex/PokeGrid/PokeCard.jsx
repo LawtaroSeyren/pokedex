@@ -6,9 +6,9 @@ export const PokeCard = ( pokemon ) => {
 
   return (
     <NavLink className="pokecard" to={`/pokemon/${ pokemon.id }`} >
-    <h2>{pokemon.name}</h2>
-    <p>ID: {pokemon.id}</p>
-    <img src={pokemon.sprite} alt={pokemon.name} />
+    <img src={ pokemon.sprite } alt={ pokemon.name } />
+    <h2>{ pokemon.name }</h2> 
+    <p className="pokemon-id">NRO #{ pokemon.id }</p>
     <p>
     {pokemon.spTypes.map(( {type, spType }) => (
       < comp.TypeBadge key={ type } type={ type } spType={ spType } />

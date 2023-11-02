@@ -1,8 +1,6 @@
 import React from 'react'
 
-export const Evolution = ({evolutionChain}) => {
-
-    console.log(evolutionChain)
+export const Evolution = ({evolutionChain, setCurrentId}) => {
     
     const renderEvolution = ( evoChain ) => {
         if (!evoChain || evoChain.length === 0) {
@@ -31,8 +29,9 @@ export const Evolution = ({evolutionChain}) => {
       };
     
     
-      return <>              
-      <div >
+      return <>
+      <h3>CADENA EVOLUTIVA</h3>             
+      <div className="evolution-chain">
         { renderEvolution( evolutionChain ) }
         </div>
         </>
