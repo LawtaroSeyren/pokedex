@@ -29,9 +29,10 @@ export const typeNames = {
 
 // Corección en los nombres de los Pokémon
 
-const cleanName = (name) => {
-    return name.charAt(0).toUpperCase() + name.slice(1)
-}
+const cleanName = ( name ) => {
+    name = name.replace( /-f$/, '♀' ).replace( /-m$/, '♂' );
+    return name.split( '-' ).map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 )).join( '-' );
+  }
 
 //* Función para traducir los nombres de los types *//
 // La función siempre va a devolver un objeto con las propiedades type (nombre en inglés) y spType (su traducción)

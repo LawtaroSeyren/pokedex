@@ -11,10 +11,10 @@ export const usePokemonCard = (selectedType) => {
     const fetchPokemonData = async () => {
       try {
         const response = await fetch(`${urlBase}/pokemon?limit=3000&offset=0`);
-        const { results } = await response.json();
         if (!response.ok) {
           throw new Error('Error al obtener lista de Pokémon');
         }
+        const { results } = await response.json();
 
         const urls = results.map(result => result.url);
         const pokemonInfo = await Promise.all(urls.map(fetchBasicData));
@@ -32,6 +32,9 @@ export const usePokemonCard = (selectedType) => {
         setPokemonList(filteredPokemon);
       } catch (error) {
         console.error('Error al obtener información de los Pokémon', error);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       } finally {
         setIsLoading(false);
       }
