@@ -2,7 +2,7 @@ import loader from '../assets/pokeball.png'
 import logo from '../assets/logo.png'
 
 export { App } from "../App";
-export { CentralImage } from './PokeDex/PokeDetail/CentralImage';
+export { CentralImage } from './PokeDex/PokeDetail/CentralImage/CentralImage';
 export { DropdownMenu } from './PokeDex/DropdownMenu/DropdownMenu';
 export { Evolution } from './PokeDex/PokeDetail/Evolution/Evolution';
 export { Header } from './Header/Header';

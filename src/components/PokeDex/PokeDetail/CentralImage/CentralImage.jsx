@@ -1,4 +1,4 @@
-import * as com from '../../'
+import * as com from '../../..'
 
 export const CentralImage = ({ name, image, spTypes }) => {
 
