@@ -277,6 +277,46 @@ body {
     margin: 1rem
   }
 
+/* Estilos para StatsBar */
+
+.stats-container {
+    margin: 2rem;
+  }
+
+  .stat-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0.7rem 0rem;
+  }
+
+  .stat-name {
+    width: 150px;
+    text-align: left;
+    margin: 0rem 0.7rem 0rem 0rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .stat-progress {
+    flex-grow: 1;
+    height: 20px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    display: flex;
+    margin-right: 10px;
+  }
+
+  .stat-fill {
+    height: 100%;
+    transition: width 1s ease-in-out;
+    background-color: #cdd9f1
+  }
+
+  .stat-number {
+    width: 50px;
+  }
+
 
 /* Estilos para movimientos */
 
