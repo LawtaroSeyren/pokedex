@@ -98,7 +98,10 @@ export const fetchBasicData = async (url) => {
     const image = defaultImage;
     const abilities = (abis?.map((ability) => cleanName(ability?.ability?.name)) || []);
 
-    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves }
+    // El primer type me permite colorear algunos elementos como fondos o barras de progreso según el tipo del Pokémon
+    const firstType = spTypes[0].type;
+
+    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves, firstType }
 
 }
 

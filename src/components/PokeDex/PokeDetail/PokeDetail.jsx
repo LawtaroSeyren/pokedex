@@ -20,8 +20,9 @@ export const PokeDetail = () => {
 
 
   const { pokemonData, isLoading, evolutionChain, prevPokemon, nextPokemon } = usePokemonDetail(currentId);
-
-  console.log(pokemonData)
+  
+  // El firstType es esencial para colorear elementos según el tipo del Pokémon
+  const { firstType } = pokemonData;
 
 
   return (
@@ -49,12 +50,11 @@ export const PokeDetail = () => {
             
             </div>
 
-
             <comp.MoveBadge moves={pokemonData.moves} />
 
-            <div className="bottom-bar">
+            <div className={ `bottom-bar ${ firstType }` }>
 
-            <comp.Evolution evolutionChain={evolutionChain} setCurrentId={setCurrentId}/>
+            <comp.Evolution evolutionChain={evolutionChain} setCurrentId={setCurrentId} firstType={ firstType }/>
             </div>
           </div>
 
