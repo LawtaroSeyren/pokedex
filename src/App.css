@@ -462,3 +462,13 @@ body {
     margin-bottom: 10px;
   }
 }
+
+/* Estilos Error */
+
+.container-error{
+  max-width: 1920px;
+}
+
+#error-text {
+  font-size: 11rem;
+}

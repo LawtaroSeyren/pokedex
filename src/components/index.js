@@ -1,9 +1,12 @@
 import loader from '../assets/pokeball.svg'
 import logo from '../assets/logo.png'
+import error404 from '../assets/error404.png'
 
 export { App } from "../App";
 export { CentralImage } from './PokeDex/PokeDetail/CentralImage/CentralImage';
 export { DropdownMenu } from './PokeDex/DropdownMenu/DropdownMenu';
+export { Error } from './Error/Error';
+export { error404 } 
 export { Evolution } from './PokeDex/PokeDetail/Evolution/Evolution';
 export { Header } from './Header/Header';
 export { Loader } from './Loader/Loader';
