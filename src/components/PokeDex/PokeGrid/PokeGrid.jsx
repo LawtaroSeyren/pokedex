@@ -8,7 +8,9 @@ export const PokeGrid = ({selectedType}) => {
   return (
 <div className="pokemon-list">
       {isLoading ? (
+        <div>
         <comp.Loader/>
+        </div>
       ) : (
         
         pokemonList.map((pokemon) => (

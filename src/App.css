@@ -71,7 +71,9 @@ body {
 
 .typeBtn {
   padding: 4px;
+  font-size: 0.9em;
   margin: 2px;
+  border-radius: 5px;
   color: white;
   font-weight: bold;
   box-shadow: 0px 2px 5px #c0c7db;
@@ -184,7 +186,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 2rem
 }
 
 .pokecard {
@@ -288,7 +290,17 @@ body {
   align-items: center;
 }
 
+.sprite-detail {
+  margin: 0px 2px;
+  filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2));
+}
 
+.id-detail {
+  font-size: 1.5rem;
+  color: #3a4b6d;
+  font-weight: 600;
+  cursor: default;
+}
 
 #japanese-title {
   margin: 0.5rem;
@@ -369,16 +381,18 @@ body {
   margin: 1rem;
 }
 
-.rojo {
+.move1 {
   background-color: #e4e9f4;
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
+  border-radius: 5px;
 }
 
-.azul {
+.move2 {
   background-color: #cdd9f1;
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
+  border-radius: 5px;
 }
 
 /* Estilos Evolution */
@@ -416,4 +430,35 @@ body {
 
 .dark-chain {
   color: white
+}
+
+/* Responsive */
+
+@media (max-width: 1550px) {
+  .top-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .central-image {
+    width: 50%;
+  }
+
+  .evolution-chain {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .abilities {
+    display: block;
+    margin-bottom: 10px;
+  }
 }

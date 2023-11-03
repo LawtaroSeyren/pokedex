@@ -6,7 +6,7 @@ export const MoveBadge = ({moves}) => {
     <h3>MOVIMIENTOS</h3>
     <div className="moves-container">
       {moves.map((move, index) => (
-        <div key={index} className={index % 2 === 0 ? 'rojo' : 'azul'}>
+        <div key={index} className={index % 2 === 0 ? 'move1' : 'move2'}>
           {move}
         </div>
       ))}

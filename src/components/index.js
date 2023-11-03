@@ -1,4 +1,4 @@
-import loader from '../assets/pokeball.png'
+import loader from '../assets/pokeball.svg'
 import logo from '../assets/logo.png'
 
 export { App } from "../App";
