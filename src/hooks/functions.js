@@ -4,6 +4,11 @@ export { useTypes } from './useTypes'
 export { usePokemonCard } from './usePokemonCard'
 export { usePokemonDetail } from './usePokemonDetail'
 
+// Imágenes en caso de nullidad
+
+import missingno  from '../assets/missingno.png'
+import missingbig  from '../assets/missingbig.png'
+
 // Traducción de los types
 
 export const typeNames = {
@@ -34,6 +39,8 @@ const cleanName = ( name ) => {
     return name.split( '-' ).map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 )).join( '-' );
   }
 
+
+
 //* Función para traducir los nombres de los types *//
 // La función siempre va a devolver un objeto con las propiedades type (nombre en inglés) y spType (su traducción)
 
@@ -52,7 +59,10 @@ export const translateTypes = (input) => {
     }
 };
 
+
+
 //* Función para obtener la información principal del Pokémon *//
+// Esta función devuelve toda la data inicial del Pokémon. Se usa en los hooks usePokemonDetail y usePokemonCard
 
 export const fetchBasicData = async (url) => {
     const response = await fetch(url);
@@ -82,6 +92,7 @@ export const fetchBasicData = async (url) => {
             other: {
                 "official-artwork": {
                     front_default: defaultImage,
+                    front_shiny: defaultImageShiny
                 }
             },
             front_default: defaultSprite
@@ -94,18 +105,22 @@ export const fetchBasicData = async (url) => {
     const height = defaultHeight ?? "??";
     const enTypes = types?.map(({ type }) => type.name) || ["unknown"];
     const spTypes = translateTypes(enTypes) ?? [{ type: "unknown", spType: "DESCONOCIDO" }];
-    const sprite = defaultSprite;
-    const image = defaultImage;
+    const sprite = defaultSprite ?? missingno;
+    const image = defaultImage ?? missingbig;
+    const imageShiny = defaultImageShiny ?? missingbig;
     const abilities = (abis?.map((ability) => cleanName(ability?.ability?.name)) || []);
 
     // El primer type me permite colorear algunos elementos como fondos o barras de progreso según el tipo del Pokémon
     const firstType = spTypes[0].type;
 
-    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves, firstType }
+    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves, firstType, imageShiny }
 
 }
 
+
+
 //* Función para obtener información complementaria a partir de ID (descripción, genera, nombre en japonés, url de cadena evolutiva) *//
+// Esta función se usa en el hook usePokemonDetail
 
 export const fetchSpeciesData = async (id) => {
 
@@ -119,6 +134,7 @@ export const fetchSpeciesData = async (id) => {
     }
     const speciesData = await response.json();
 
+    // Descripción del Pokémon en inglés
     const englishEntry = speciesData.flavor_text_entries.find(entry => entry.language.name === "en");
     const desc = englishEntry ? englishEntry.flavor_text : "???";
 
@@ -132,37 +148,46 @@ export const fetchSpeciesData = async (id) => {
     return { evoUrl, desc, genera, japaneseName };
 }
 
-//*  *//
 
-export const fetchEvolutionChain = async (evourl, name, image, id) => {
-    if (!evourl) {
-        // Si evoUrl es null o undefined, crea un evolutionChain por defecto
+
+//* Función para obtener datos de la cadena evolutiva *//
+// Esta función se usa en el hook usePokemonDetail para obtener cada fase evolutiva de un Pokémon, con su nombre, id, e imagen
+// Recibe url obtenida en fetchSpeciesData y los datos del Pokémon que se quiere conocer su evolución
+
+export const fetchEvolutionChain = async ( evourl, name, image, id ) => {
+    if ( !evourl ) {
+        // Si evoUrl es null o undefined, crea un evolutionChain por defecto únicamente con los datos del Pokémon elegido
         const defaultEvolutionChain = [{ name, image, id }];
         return defaultEvolutionChain;
     }
 
-    const evolutionResponse = await fetch(evourl);
+    const evolutionResponse = await fetch( evourl );
     const evolutionData = await evolutionResponse.json();
-    const evolutionChain = await processEvolutionChain(evolutionData);
+
+    // Llama a función processEvolutionChain, detallada más abajo
+    const evolutionChain = await processEvolutionChain( evolutionData );
     return evolutionChain;
 };
 
-const processEvolutionChain = async (evolutionData) => {
+const processEvolutionChain = async ( evolutionData ) => {
     // La función me va a devolver un array
     const evolutionChain = [];
 
     // Esta función me permite obtener el ID de un Pokémon que forma parte de la cadena evolutiva a partir de la URL
-    const getIdFromUrl = (url) => {
-        const idFromUrl = url.split('/');
-        return idFromUrl[idFromUrl.length - 2];
+    const getIdFromUrl = ( url ) => {
+        const idFromUrl = url.split( '/' );
+        return idFromUrl[ idFromUrl.length - 2 ];
     };
 
+    // Función para crear cada etapa evolutiva
     const getStage = async (stageData) => {
         const speciesId = getIdFromUrl(stageData.species.url);
-        // Fetch para obtener imagen
+        // Solicitud para obtener imagen
         const response = await fetch(`${urlBase}/pokemon/${speciesId}`)
         const data = await response.json();
         const imageUrl = data.sprites.front_default;
+
+        // Cada etapa está conformada por nombre del Pokémon, su URL, su imagen en caso de tener, y su ID
         const stage = {
             name: cleanName(stageData.species.name),
             url: stageData.species.url,
@@ -172,6 +197,7 @@ const processEvolutionChain = async (evolutionData) => {
 
         if (stageData.evolves_to && stageData.evolves_to.length > 0) {
             // Si hay evoluciones, se procesan como un subarray de "evolution"
+            // Se crea una nueva etapa con las mismas propiedades. Si llega a haber otra evolución, se procesa dentro de otro array
             stage.evolution = [];
             for (const evolution of stageData.evolves_to) {
                 stage.evolution.push(await getStage(evolution));
@@ -185,6 +211,9 @@ const processEvolutionChain = async (evolutionData) => {
 
     return evolutionChain;
 };
+
+//* Función para solicitar únicamente el nombre de un Pokémon a partir de su id. *//
+// Esta función se usa en el hook usePokemonDetail, para mostrar los nombres de los Pokémon que le siguen 
 
 export const getMiniData = async (id) => {
     const response = await fetch(`${urlBase}/pokemon/${id}`);

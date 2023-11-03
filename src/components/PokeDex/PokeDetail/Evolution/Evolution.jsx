@@ -3,7 +3,7 @@ import React from 'react'
 export const Evolution = ({ evolutionChain, setCurrentId, firstType }) => {
 
   // Añado variaciones de colores según el type del Pokémon para que haya contrastes
-  const darkTypes = ["dark", "dragon", "fighting", "ghost"];
+  const darkTypes = ["dark", "dragon", "fighting", "ghost", "poison"];
   const isDarkType = darkTypes.includes(firstType);
   const evolutionTitleClass = isDarkType ? "evolution-title" : null;
   const evolutionChainClass = isDarkType ? "evolution-chain dark-chain" : "evolution-chain";
