@@ -4,10 +4,32 @@ export { useTypes } from './useTypes'
 export { usePokemonCard } from './usePokemonCard'
 export { usePokemonDetail } from './usePokemonDetail'
 
+import red from "../assets/red.jpg"
+import blue from "../assets/blue.jpg"
+import yellow from "../assets/yellow.jpg"
+import gold from "../assets/gold.jpg"
+import silver from "../assets/silver.jpg"
+import crystal from "../assets/crystal.jpg"
+import ruby from "../assets/ruby.jpg"
+import sapphire from "../assets/sapphire.jpg"
+import emerald from "../assets/emerald.jpg"
+import firered from "../assets/firered.jpg"
+import leafgreen from "../assets/leafgreen.jpg"
+import diamond from "../assets/diamond.jpg"
+import pearl from "../assets/pearl.jpg"
+import platinum from "../assets/platinum.jpg"
+import heartgold from "../assets/heartgold.jpg"
+import soulsilver from "../assets/soulsilver.jpg"
+import black from "../assets/black.jpg"
+import white from "../assets/white.jpg"
+import black2 from "../assets/black-2.jpg"
+import white2 from "../assets/white-2.jpg"
+
+
 // Imágenes en caso de nullidad
 
-import missingno  from '../assets/missingno.png'
-import missingbig  from '../assets/missingbig.png'
+import missingno  from "../assets/missingno.png"
+import missingbig  from "../assets/missingbig.png"
 
 // Traducción de los types
 
@@ -32,9 +54,32 @@ export const typeNames = {
     steel: 'ACERO',
 };
 
+export const gameCovers = {
+    red,
+    blue,
+yellow,
+gold ,
+silver ,
+crystal ,
+ruby ,
+sapphire ,
+emerald ,
+firered ,
+leafgreen ,
+diamond ,
+pearl ,
+platinum ,
+heartgold ,
+soulsilver ,
+black ,
+white ,
+black2 ,
+white2 ,
+};
+
 // Corección en los nombres de los Pokémon
 
-const cleanName = ( name ) => {
+export const cleanName = ( name ) => {
     name = name.replace( /-f$/, '♀' ).replace( /-m$/, '♂' );
     return name.split( '-' ).map( word => word.charAt( 0 ).toUpperCase() + word.slice( 1 )).join( '-' );
   }
@@ -88,6 +133,7 @@ export const fetchBasicData = async (url) => {
         is_default = false,
         abilities: abis,
         moves: moveNames,
+        game_indices,
         sprites: {
             other: {
                 "official-artwork": {
@@ -99,6 +145,7 @@ export const fetchBasicData = async (url) => {
         }
     } = basicData;
 
+    const games = game_indices.map((game) => (game.version.name).replace(/-/g, ''));
     const name = cleanName(pokeName)
     const moves = (moveNames.map((move) => cleanName(move.move.name)) || []);
     const weight = defaultWeight ?? "??";
@@ -113,7 +160,7 @@ export const fetchBasicData = async (url) => {
     // El primer type me permite colorear algunos elementos como fondos o barras de progreso según el tipo del Pokémon
     const firstType = spTypes[0].type;
 
-    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves, firstType, imageShiny }
+    return { name, stats, abilities, weight, height, id, enTypes, spTypes, is_default, sprite, image, moves, firstType, imageShiny, games }
 
 }
 
@@ -152,7 +199,7 @@ export const fetchSpeciesData = async (id) => {
 
 //* Función para obtener datos de la cadena evolutiva *//
 // Esta función se usa en el hook usePokemonDetail para obtener cada fase evolutiva de un Pokémon, con su nombre, id, e imagen
-// Recibe url obtenida en fetchSpeciesData y los datos del Pokémon que se quiere conocer su evolución
+// Recibe url obtenida en fetchSpeciesData y los datos del Pokémon del que se quiere conocer su evolución
 
 export const fetchEvolutionChain = async ( evourl, name, image, id ) => {
     if ( !evourl ) {

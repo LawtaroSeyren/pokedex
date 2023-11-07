@@ -8,6 +8,7 @@ export { DropdownMenu } from './PokeDex/DropdownMenu/DropdownMenu';
 export { Error } from './Error/Error';
 export { error404 } 
 export { Evolution } from './PokeDex/PokeDetail/Evolution/Evolution';
+export { GameList } from './PokeDex/PokeDetail/GameList/GameList';
 export { Header } from './Header/Header';
 export { Loader } from './Loader/Loader';
 export { loader };
