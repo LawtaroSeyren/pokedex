@@ -147,7 +147,7 @@ export const fetchBasicData = async (url) => {
 
     const games = game_indices.map((game) => (game.version.name).replace(/-/g, ''));
     const name = cleanName(pokeName)
-    const moves = (moveNames.map((move) => cleanName(move.move.name)) || []);
+    const moves = (moveNames.map((move) =>  cleanName(move.move.name) ) || []);
     const weight = defaultWeight ?? "??";
     const height = defaultHeight ?? "??";
     const enTypes = types?.map(({ type }) => type.name) || ["unknown"];

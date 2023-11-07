@@ -58,7 +58,7 @@ export const PokeDetail = () => {
           </div>
 
           {/* MoveBadge: Lista de movimientos que aprende el Pokémon */}
-          <comp.MoveBadge moves={ pokemonData.moves } />
+          <comp.MoveBadge moves={ pokemonData.moves }/>
 
           {/* GameList: Lista con todos los juegos en los que aparece el Pokémon */}
           <comp.GameList games={ pokemonData.games } />
