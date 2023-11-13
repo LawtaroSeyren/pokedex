@@ -346,7 +346,7 @@ body {
 /* Estilos para StatsBar */
 
 .stats-container {
-  margin: 2rem;
+  margin: 2rem 0;
 }
 
 .stat-bar {
@@ -500,5 +500,33 @@ body {
   .abilities {
     display: block;
     margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .description-detail{
+    margin: 3rem 0;
+  }
+  
+  .stats-container{
+    margin: 0
+  }
+
+  body{
+    margin: auto
+  }
+
+  .container{
+    width: 95%;
+  }
+
+  .gamecard{
+    width: 180px;
+    height: 180px;
+  }
+
+  .central-image{
+    width: 80%;
   }
 }
