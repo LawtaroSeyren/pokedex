@@ -8,8 +8,6 @@ export const PokeDetail = () => {
   // Obtengo el ID desde la URL
   const { id: initialId } = useParams();
 
-  const navigate = useNavigate();
-
   // Controlo estado de ID para poder modificarlo e ir cambiando de Pokémon
   const [ currentId, setCurrentId ] = useState(Number( initialId ));
 
@@ -19,14 +17,10 @@ export const PokeDetail = () => {
   // El firstType es esencial para colorear elementos según el tipo del Pokémon
   const { firstType } = pokemonData;
 
-  // Si el valor del ID cambia, navega a la nueva URL y el componente se re-renderiza
-  useEffect(() => {
-    navigate(`/pokemon/${ currentId }`);
-  }, [ currentId ]);
-
+  // useEffect para actualizar 'currentId' cuando cambia el parámetro 'initialId', asegurando la sincronización con la URL y la renderización correcta de los detalles del Pokémon.
   useEffect(() => {
     setCurrentId(Number( initialId ));
-  }, [ initialId ]);
+  }, [ initialId ]); 
 
 
   return (
@@ -38,7 +32,7 @@ export const PokeDetail = () => {
 
         // NameDetail: Barra con Pokémon anterior y posterior, nombre, nombre en japonés, y sprite
         <div className="container">
-          <comp.NameDetail { ...pokemonData } setCurrentId={ setCurrentId } prevPokemon={ prevPokemon } nextPokemon={ nextPokemon } />
+          <comp.NameDetail { ...pokemonData } prevPokemon={ prevPokemon } nextPokemon={ nextPokemon } />
 
           <div className="columns">
             <div className="column">
@@ -64,7 +58,7 @@ export const PokeDetail = () => {
           <comp.GameList games={ pokemonData.games } />
 
           {/* Evolution: Cadena evolutiva del Pokémon */}
-          <comp.Evolution evolutionChain={ evolutionChain } setCurrentId={ setCurrentId } firstType={ firstType } />
+          <comp.Evolution evolutionChain={ evolutionChain } firstType={ firstType } />
         </div>
 
       }

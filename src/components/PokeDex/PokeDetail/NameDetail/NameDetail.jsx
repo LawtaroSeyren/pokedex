@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import { NavLink } from 'react-router-dom';
 
-export const NameDetail = ({ name, sprite, id, setCurrentId, prevPokemon, nextPokemon, japaneseName, firstType }) => {
+export const NameDetail = ({ name, sprite, id, prevPokemon, nextPokemon, japaneseName, firstType }) => {
 
-    const increaseId = () => {
+  // Lógica de cambiar id por onClick
+
+    /* const increaseId = () => {
         const newId = ( id + 1 );
         setCurrentId( newId );
       };
@@ -14,7 +16,9 @@ export const NameDetail = ({ name, sprite, id, setCurrentId, prevPokemon, nextPo
     
       useEffect(() => {
         setCurrentId( id );
-      }, [ id ] )
+      }, [ id ] ) 
+      
+      */
 
   return (
     <>
@@ -24,7 +28,7 @@ export const NameDetail = ({ name, sprite, id, setCurrentId, prevPokemon, nextPo
         // Barra en la que muestro el nombre del Pokémon anterior (si es que existe), un bloque con nombre e imagen del actual, y el nombre del siguiente
         }
 
-        { prevPokemon ? <h2 className="pokemon-list-name" onClick={ decreaseId } > ◀ { prevPokemon.name } </h2> : <h2>Pokédex</h2> }
+        { prevPokemon ? <NavLink className="pokemon-list-name" to={`/pokemon/${ prevPokemon.id }`} ><h2> ◀ { prevPokemon.name } </h2></NavLink> : <h2>Pokédex</h2> }
         <div className="top-bar-central-name">
           <h1>{ name }</h1>
           <span className="sprite-detail"><img src={ sprite } alt={ name } /></span>
@@ -32,7 +36,7 @@ export const NameDetail = ({ name, sprite, id, setCurrentId, prevPokemon, nextPo
 
         </div>
 
-        { nextPokemon ? <h2 className="pokemon-list-name" onClick={ increaseId } > { nextPokemon.name } ▶</h2> : <h2>Pokédex</h2> }
+        { nextPokemon ? <NavLink className="pokemon-list-name" to={`/pokemon/${ nextPokemon.id }`} ><h2> { nextPokemon.name } ▶ </h2></NavLink> : <h2>Pokédex</h2> }
 
       </div>
 

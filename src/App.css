@@ -275,6 +275,7 @@ body {
 }
 
 .pokemon-list-name {
+  text-decoration: none;
   color: #6e798e;
   cursor: pointer;
   transition: all 0.3s;
@@ -442,6 +443,7 @@ body {
 }
 
 .evolution-stage {
+  text-decoration: none;
   display: inline-block;
   margin: 0rem 1rem;
   cursor: pointer;
@@ -457,6 +459,7 @@ body {
 }
 
 .evolution-name {
+  color: #1b263b;
   font-weight: 550;
   margin: 0;
 }

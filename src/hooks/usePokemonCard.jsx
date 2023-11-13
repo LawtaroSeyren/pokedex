@@ -10,7 +10,7 @@ export const usePokemonCard = (selectedType) => {
   //Si hay errores en la solicitud se almacenará un estado de error para mostrar al usuario
   const [error, setError] = useState(null);
 
-  // Ocupo useMemo para guardar la información del fetch y aplicar los filtros dependiendo del type elegido en el menú desplegable
+  // Ocupo useMemo para guardar la información de la petición y aplicar los filtros dependiendo del type elegido en el menú desplegable
   const filteredPokemon = useMemo(() => {
     if (!isLoading) {
       let filteredPokemon;
