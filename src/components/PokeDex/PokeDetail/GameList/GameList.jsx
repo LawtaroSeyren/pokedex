@@ -12,7 +12,7 @@ export const GameList = ({ games }) => {
                 { games.map(( game, index ) => (
                     <div key={ index } className="gamecard">
                         <img src={ gameCovers[ game ] } alt="" />
-                        <p>{ cleanName( game ) }</p>
+                        <p>Pokémon { cleanName( game ) }</p>
                     </div>
                 ))}
             </div>
