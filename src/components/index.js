@@ -1,4 +1,4 @@
-import loader from '../assets/pokeball.svg'
+import loaderSVG from '../assets/pokeball.svg'
 import logo from '../assets/logo.png'
 import error404 from '../assets/error404.png'
 
@@ -11,7 +11,7 @@ export { Evolution } from './PokeDex/PokeDetail/Evolution/Evolution';
 export { GameList } from './PokeDex/PokeDetail/GameList/GameList';
 export { Header } from './Header/Header';
 export { Loader } from './Loader/Loader';
-export { loader };
+export { loaderSVG };
 export { logo };
 export { MoveBadge } from './PokeDex/PokeDetail/MoveBadge/MoveBadge';
 export { NameDetail } from './PokeDex/PokeDetail/NameDetail/NameDetail';
