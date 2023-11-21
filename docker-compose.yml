@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  pokedex: 
+    image: pokedex:1.0.0
+    build:
+      context: ./
+    container_name: pokedex
+    ports:
+      - "3000:3000"
+

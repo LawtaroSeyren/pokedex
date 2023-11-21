@@ -10,6 +10,10 @@ export const Evolution = ({ evolutionChain, firstType }) => {
   const evolutionNameClass = isDarkType ? "evolution-name dark-chain" : "evolution-name";
   const evolutionChainClass = isDarkType ? "evolution-chain dark-chain" : "evolution-chain";
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
+
 
   // Creo función para mostrar la cadena evolutiva
   // Si no hay datos en la cadena, no muestro nada
@@ -25,7 +29,7 @@ export const Evolution = ({ evolutionChain, firstType }) => {
     return (
       <>
         {/* Retorno los datos obtenidos */}
-        <NavLink className="evolution-stage" to={`/pokemon/${ id }`} >
+        <NavLink className="evolution-stage" to={`/pokemon/${ id }`} onClick={handleClick} >
           {/* Al clickear en el contenedor, navego hacia la url del Pokémon en cuestión */}
           <img src={ image } alt={ name } className="evolution-image" />
         <p className={ evolutionNameClass }> { name } #{ id } </p> 
