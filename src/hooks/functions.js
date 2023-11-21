@@ -1,8 +1,8 @@
 export const urlBase = "https://pokeapi.co/api/v2"
 
 export { useTypes } from './useTypes'
-export { usePokemonCard } from './usePokemonCard'
 export { usePokemonDetail } from './usePokemonDetail'
+export { usePokemonList } from './usePokemonList'
 
 import red from "../assets/red.jpg"
 import blue from "../assets/blue.jpg"

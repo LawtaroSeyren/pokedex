@@ -189,12 +189,24 @@ body {
   gap: 2rem
 }
 
+.loading-container{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  z-index: 1;
+}
+
 .pokecard {
   text-decoration: none;
   border-radius: 30px;
   padding: 10px;
   text-align: center;
-  width: 230px;
+  width: 250px;
+  height: 200px;
   margin: 1rem;
   box-shadow: 0px 5px 8px #c0c7db;
   background-color: white;
@@ -530,3 +542,4 @@ body {
     width: 80%;
   }
 }
+
